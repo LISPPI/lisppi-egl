@@ -1,4 +1,9 @@
-(in-package #:egl)
+(defpackage #:dx+egl
+  (:use #:cffi #:cl)
+  (:export)
+  )
+
+(in-package #:dx+egl)
 
 
 (define-foreign-library lib-dispmanx

@@ -2,9 +2,7 @@
 
 (defpackage #:dispmanx
   (:nicknames :dx)
-  (:use #:cffi #:cl)
+  (:use #:cffi #:dx+egl #:cl)
   (:export)
   )
-
-
 

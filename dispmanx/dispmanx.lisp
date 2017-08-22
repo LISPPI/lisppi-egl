@@ -4,6 +4,10 @@
 ;; Exports and improvements
 ;;
 ;;-----------------------------------------------------------------------------
+(export 'rect)
+(export '(x y width height))
+
+
 ;; include/interface/vmcs_host/vc_dispmanx_types.h
 (defparameter PROTECTION-NONE 0)
 (defparameter PROTECTION-MAX  15)
@@ -32,8 +36,8 @@
        ,result)))
 
 ;;-----------------------------------------------------------------------------
-(defun init ()
-  (&init))
+;; bcm_host_init
+(defun init () (&init))
 (export 'init)
 
 ;;-----------------------------------------------------------------------------

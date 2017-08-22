@@ -1,7 +1,6 @@
 ;;;; package.lisp
 
-(defpackage #:lp-egl
-  (:nicknames #:egl)
+(defpackage #:egl
   (:use #:cffi #:cl)
   (:export)
   )

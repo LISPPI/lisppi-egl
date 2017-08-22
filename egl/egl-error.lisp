@@ -39,10 +39,12 @@
 
 (defun get-error ()
   (let ((error-number (&get-error)))
-    (values error-number (aref *error-names* (- error-number #x3000)))))
+    (values (aref *error-names* (- error-number #x3000)) error-number)))
 (export 'get-error)
 
 (defmacro errorcheck (fun &rest args)
   `(when (zerop (,fun ,@args))
-     (error "egl ~A returns: Bad ~A" ,(symbol-name fun) (get-error))))
+     (let ((e (get-error)))
+       (format t "ERROR ~A~&" e)
+       (error "egl ~A returns: Bad ~A" ,(symbol-name fun) e))))
 

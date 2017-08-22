@@ -307,7 +307,7 @@
 (declaim (inline &get-display))
 (defcfun ("eglGetDisplay" &get-display) (:pointer :VOID)
   "see: (/opt/vc/include/EGL/egl.h:251:31)"
-  (display-id  (:pointer :VOID)) ;; display_id
+  (display-id  :uint) ;; display_id
 )
 ;;------------------------------------------------------------------------------
 ;; (/opt/vc/include/EGL/egl.h:249:27)

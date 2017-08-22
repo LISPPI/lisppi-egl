@@ -1,6 +1,6 @@
 ;;
 ;;
-(asdf:defsystem #:lp-egl
+(asdf:defsystem #:lisppi-egl
   :description "set me!"
   :author "StackSmith <fpgasm@apple2.x10.mx>"
   :license "BSD 3-clause license"
