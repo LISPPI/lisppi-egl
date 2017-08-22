@@ -52,7 +52,7 @@ As Lisp programmers expect, commonly used singleton objects, `egl::*display*` in
 (egl:bind-api)
 (egl:create-context)
 ```
-All the clutter of keeping track of display-ids, display handles, congi handles etc is eliminated unless required.
+The visual noise of display-ids, display handles, config and context handles is eliminated (unless required, of course).
 
 ## Examples
 
