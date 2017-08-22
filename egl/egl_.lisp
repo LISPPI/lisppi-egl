@@ -83,8 +83,8 @@
 (defcfun ("eglMakeCurrent" &make-current) :UINT
   "see: (/opt/vc/include/EGL/egl.h:301:31)"
   (dpy  (:pointer :VOID)) ;; dpy
-  (draw  (:pointer :VOID)) ;; draw
-  (read  (:pointer :VOID)) ;; read
+  (draw_  (:pointer :VOID)) ;; draw
+  (read_  (:pointer :VOID)) ;; read
   (ctx  (:pointer :VOID)) ;; ctx
 )
 ;;------------------------------------------------------------------------------

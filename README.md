@@ -54,6 +54,8 @@ As Lisp programmers expect, commonly used singleton objects, `egl::*display*` in
 ```
 The visual noise of display-ids, display handles, config and context handles is eliminated (unless required, of course).
 
+EGL constants are kept in `EGL-` package, to be used like `egl-:red-size`.
+
 ## Examples
 
 DISPMANX-only test pattern:
