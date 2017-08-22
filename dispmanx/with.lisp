@@ -76,27 +76,3 @@
     (deinit)))
 
 
-
-;;==============================================================================
-;; A common use case - create a full-size native window
-(defun init-native ()
-  (dx:init)
-  (multiple-value-bind (width height) (dx:display-size)
-    (display-open)
-    (with:all
-	((rect (dst-rect 0 0 width height))
-	 (rect (src-rect 0 0 (ash width 16) (ash height 16))))
-      (let ((update (update-start)))
-	(prog1 (make-&native-window
-		(element-add update 0
-			     dst-rect 0
-			     src-rect
-			     (null-pointer))
-		width height)
-	  (update-submit-sync update))))))
-
-(defun uninit-native (native-window)
-  (let ((update (update-start)))
-    (element-remove update (mem-ref native-window :uint))
-    (update-submit-sync update)
-    (foreign-free native-window)))
