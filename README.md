@@ -19,12 +19,48 @@ git clone https://github.com/LISPPI/lisppi-egl.git
 
 (ql:quickload :lisppi-egl)
 ```
+
+## Basics
+
+The libraries cover most if not all functionality of DISPMANX and EGL subsystems.  Lisp names are generally created by using - instead of _, downcasing and removing EGL or DISPMANX prefix.  so `eglSwapBuffers` becomes `egl:swap-buffers`
+
+Literal equivalents of the C library functions are prefixed with & and not exported, and stored in the lisp files that end with _.  `eglSwapBuffers` equivalent, `egl::&swap-buffers` is defined in `egl/egl_.lisp` as 
+
+```
+;;------------------------------------------------------------------------------
+;; (/opt/vc/include/EGL/egl.h:312:31)
+;;
+(declaim (inline &swap-buffers))
+(defcfun ("eglSwapBuffers" &swap-buffers) :UINT
+  "see: (/opt/vc/include/EGL/egl.h:312:31)"
+  (dpy  (:pointer :VOID)) ;; dpy
+  (surface  (:pointer :VOID)) ;; surface
+)
+```
+A lispier form of the same function is defined in `egl/egl.lisp`:
+```
+;;-------------------------------------------------------------
+(defun swap-buffers ( surface &key (display *display*))
+  (&swap-buffers display surface))
+(export 'swap-buffers)
+
+```
+As Lisp programmers expect, commonly used singleton objects, `egl::*display*` in this case, are hidden unless needed, reducing clutter. This allows streamline code like:
+```
+(egl:get-display)
+(egl:init)
+(egl:bind-api)
+(egl:create-context)
+```
+All the clutter of keeping track of display-ids, display handles, congi handles etc is eliminated unless required.
+
+## Examples
+
 DISPMANX-only test pattern:
 
 ```
 (in-package :dispmanx)
 (defun test-pattern ()
-  (declare (optimize (debug 3)))
   (init)
   (with:all
       ((display (disp))
