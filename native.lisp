@@ -42,22 +42,23 @@
     (foreign-free native-window)))
 
 
-(defun init-egl (&key (api egl-:opengl-es-api))
+(defun init-egl (&key (api egl:opengl-es-api))
   (egl:get-display)
   (egl:init)
   (egl:choose-single-config :attribs
-			    '(#.egl-:red-size 8
-			      #.egl-:green-size 8
-			      #.egl-:blue-size 8
-			      #.egl-:alpha-size 8
-			      #.egl-:surface-type #.egl-:window-bit
-			      #.egl-:renderable-type #.egl-:openvg-bit
-			      #.egl-:none))
+			    '(#.egl:red-size 8
+			      #.egl:green-size 8
+			      #.egl:blue-size 8
+			      #.egl:alpha-size 8
+			      #.egl:surface-type #.egl:window-bit
+			    ;;  #.egl:renderable-type #.egl:openvg-bit
+			      #.egl:none))
   (egl:bind-api api)
   (egl:create-context))
 
 (defun deinit-egl ()
-  (egl:destroy-context)
+  ;;  (egl:destroy-context)
+  (egl:make-current egl:no-surface egl:no-surface :context egl:no-context)
   (egl:deinit))
 
 
@@ -69,12 +70,12 @@
 (defparameter *surface* nil)
 (defparameter *native* nil)
 
-(defun init (&key (api egl-:opengl-es-api))
+(defun init (&key (api egl:opengl-es-api))
   (setf *native* (init-dx))
   (init-egl :api api)
   (setf *surface* (egl-from-dispmanx *native*)))
 
 (defun deinit ()
-  (egl:destroy-surface *surface*)
-  (deinit-egl)
-  (deinit-dx *native*))
+  ;;  (egl:destroy-surface *surface*)
+ (deinit-egl)
+ (deinit-dx *native*))

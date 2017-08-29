@@ -1,7 +1,7 @@
 ;;
 ;;
 (asdf:defsystem #:lisppi-egl
-  :description "set me!"
+  :description "Raspberry Pi accelerated native graphics without X"
   :author "StackSmith <fpgasm@apple2.x10.mx>"
   :license "BSD 3-clause license"
   :serial t

@@ -39,11 +39,11 @@
 ;;-------------------------------------------------------------
 ;; Let's adopt dispmanx terminology to avoid semantic collision
 (defun deinit (&key (display *display* displayp))
-  (&terminate display))
+  (errorcheck &terminate display))
 (export 'deinit)
 
 ;;-------------------------------------------------------------
-(defun get-display (&key (display-id +default-display+)
+(defun get-display (&key (display-id default-display)
 		      (no-default nil))
   "specify :no-default t to avoid setting *display*"
   (let ((display (&get-display display-id)))
@@ -83,7 +83,7 @@
 (export 'create-context)
 
 ;;-------------------------------------------------------------
-(defun bind-api (&optional (api +opengl-es-api+))
+(defun bind-api (&optional (api opengl-es-api))
   (errorcheck &bind-api api))
 (export 'bind-api)
 
@@ -160,9 +160,9 @@
 (export 'get-current-context)
 
 ;;-------------------------------------------------------------
-(defun make-current (draw read &key (display *display*)
+(defun make-current (xdraw xread &key (display *display*)
 				  (context *context*))
-  (errorcheck &make-current display draw read context))
+  (errorcheck &make-current display xdraw xread context))
 (export 'make-current)
 
 
