@@ -244,7 +244,7 @@
 		    alpha 
 		    &key (display *display*)
 		      (protection PROTECTION-NONE)
-		      (transform :no-rotate)
+		      (transform 0)
 		      (clamp (null-pointer)))
   (hate-0
    (&element-add update display layer dest_rect src src_rect

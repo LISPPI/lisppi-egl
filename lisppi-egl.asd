@@ -5,7 +5,7 @@
   :author "StackSmith <fpgasm@apple2.x10.mx>"
   :license "BSD 3-clause license"
   :serial t
-  :depends-on (:cffi :trivial-with)
+  :depends-on (:malloc :cffi :trivial-with)
   :components ((:file "library")
 	       (:file "common")
 

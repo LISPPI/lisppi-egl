@@ -7,9 +7,9 @@
 ;; native-window is a c structure used by egl initialization code.
 ;;
 (defcstruct (&native-window)
-  (element :uint)
-  (width  :int)
-  (height :int))
+  (element :uint);dispmanx element
+  (width  :int) ;window width
+  (height :int)) ;window height
 
 (defun make-&native-window (&rest rest)
   (foreign-alloc :int :initial-contents rest))
@@ -30,7 +30,8 @@
 		(dx:element-add update 0
 			     dst-rect 0
 			     src-rect
-			     (null-pointer))
+			     (null-pointer)
+			     			     )
 		width height)
 	  (dx:update-submit-sync update))))))
 
@@ -73,9 +74,30 @@
 (defun init (&key (api egl:opengl-es-api))
   (setf *native* (init-dx))
   (init-egl :api api)
-  (setf *surface* (egl-from-dispmanx *native*)))
+  (setf *surface* (egl-from-dispmanx *native*))
+  *native*)
 
 (defun deinit ()
   ;;  (egl:destroy-surface *surface*)
  (deinit-egl)
  (deinit-dx *native*))
+
+
+
+(defun init-sprite (x y w h)
+  "initialize dispmanx, return full-size native window cstruct"
+  (dx:init)
+  
+  (dx:display-open)
+  (with:all
+      ((dx:rect (dst-rect x y w h))
+       (dx:rect (src-rect x y (ash w 16) (ash h 16))))
+    (let ((update (dx:update-start)))
+      (prog1 (make-&native-window
+	      (dx:element-add update 0
+			      dst-rect 0
+			      src-rect
+			      (null-pointer)
+			      )
+	      w h)
+	(dx:update-submit-sync update)))))

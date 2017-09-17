@@ -18,7 +18,7 @@
 				(#x300B . "Native Window")
 				(#x300C . "Parameter")
 				(#x300D . "Surface")
-				(#x300D . "Context Lost")
+				(#x300E . "Context Lost")
 				
 				)
 			    do (setf (gethash key ht) value))

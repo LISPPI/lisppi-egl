@@ -529,3 +529,10 @@
 (defcfun ("vc_dispmanx_stop" &stop) :VOID
   "see: (/opt/vc/include/interface/vmcs_host/vc_dispmanx.h:45:23)"
 )
+(defparameter CHANGE-LAYER 1)
+(defparameter CHANGE-OPACITY 2)
+(defparameter CHANGE-DEST-RECT 4)
+(defparameter CHANGE-SRC-RECT 8)
+(defparameter CHANGE-MASK-RES #x10)
+(defparameter CHANGE-TRANSFORM #x20)
+(export '(change-layer change-opacity change-dest-rect change-src-rect change-mask-res change-transform))
